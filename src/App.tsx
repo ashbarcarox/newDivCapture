@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useRef } from 'react';
 import './App.css';
+import Second from './Second';
+import First from './First';
 
 function App() {
+
+  const ref = useRef(null);
+
+  const ComponentCapture = React.forwardRef((props: any, ref) => {
+    return < First {...props} forwardedRef={ref}/>
+  })
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        Testing Screen capture
+        <div ref = {ref}>
+          <h1> ARI </h1>
+          <Second />
+        </div>
+        <button onClick = {ComponentCapture}> Capture Component </button>
+        {/*<button onClick = {componentCapture}> Capture Component </button>*/}
       </header>
     </div>
   );
 }
 
 export default App;
+
