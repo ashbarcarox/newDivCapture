@@ -4,9 +4,9 @@ import { toBlob } from 'html-to-image';
 import Second from './Second';
 
 
-const Testing = React.forwardRef((props, ref) => (
+// const Testing = React.forwardRef((props, ref) => (
 
-  ));
+//   ));
 
 
 function Testing1() {
@@ -56,4 +56,4 @@ function Testing1() {
   );
 }
 
-export default Testing;
+export default Testing1;

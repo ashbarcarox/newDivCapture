@@ -1,15 +1,29 @@
-import React, { useRef } from 'react';
+import React, { forwardRef, Ref, useRef } from 'react';
 import './App.css';
-import Second from './Second';
 import First from './First';
+import Second from './Second';
 
 function App() {
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLImageElement>(null);
 
-  const ComponentCapture = React.forwardRef((props: any, ref) => {
-    return < First {...props} forwardedRef={ref}/>
-  })
+  // const ComponentCapture = React.forwardRef((props: any, ref) => {
+  //   console.log("App.componentCApture reached")
+  //   return < First {...props} forwardedRef={ref}/>
+  // })
+
+  // const ScreenshotComponent = forwardRef((props: any, ref: Ref<HTMLImageElement>) => {
+  //   //pass data to component from here
+  //   return (
+  //     <First 
+  //       ref={ref}
+  //       {...props}
+  //     />
+  //   );
+  // });
+
+
+  const SecondComponent = <Second/>
   
   return (
     <div className="App">
@@ -17,14 +31,11 @@ function App() {
         Testing Screen capture
         <div ref = {ref}>
           <h1> ARI </h1>
-          <Second />
+          <First ref={ref}/>
         </div>
-        <button onClick = {ComponentCapture}> Capture Component </button>
-        {/*<button onClick = {componentCapture}> Capture Component </button>*/}
       </header>
     </div>
   );
 }
 
 export default App;
-

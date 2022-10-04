@@ -1,11 +1,10 @@
-import React, { useCallback, useRef, forwardRef } from 'react';
+import { useCallback, MutableRefObject, Ref, forwardRef } from 'react';
 import './App.css';
 import { toBlob } from 'html-to-image';
-import Second from './Second';
 
-function First() {
+function First(props: any, ref: Ref<HTMLImageElement>) {
 
-  const ref = forwardRef;
+  //const {forwardedRef, ...ref} = this.props;
 
 
 console.log(forwardRef.name)
@@ -24,26 +23,27 @@ console.log(forwardRef.name)
 }
 
   const componentCapture = useCallback(() => {
-    // if (ref.current === null) {
-    //   return
-    // }
+    if ((ref as MutableRefObject<HTMLDivElement>).current === null) {
+      return
+    }
 
-    // toBlob(ref.current, { cacheBust: true, })
-    // .then((blob) => {
-    //   copyToClipboard(blob);
-    //   console.log("Copy to clipboard function called");
-    // })
-    // .catch((err) => {
-    //   console.log(err)
-    // })
+    toBlob((ref as unknown as MutableRefObject<HTMLDivElement>).current, { cacheBust: true, })
+    .then((blob) => {
+      copyToClipboard(blob);
+      console.log("Copy to clipboard function called");
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }, [ref])
 
   
   return (
     <div>
-        <button onClick = {componentCapture}> Capture Component </button>
+      <button onClick = {componentCapture}> Capture Component </button>
+      {/*<button onClick = {componentCapture}> Capture Component </button>*/}
     </div>
   );
 }
 
-export default First;
+export default forwardRef(First);
